@@ -23,7 +23,7 @@ end",
   $environment = "development",
   ) {
   if ! defined(Class['unicorn']) {
-    class{'unicorn'}
+    class{ 'unicorn': }
   }
 
   file { "/etc/unicorn.d/${name}": content => template('unicorn/instance.erb') }
