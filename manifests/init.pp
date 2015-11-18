@@ -11,9 +11,8 @@
 # Sample Usage:
 #
 class unicorn {
-  if (!defined(Package['rubygems'])) {
-    package { 'rubygems': ensure => installed, }
-  }
+
+  require ruby::dev
 
   if (!defined(Package['unicorn'])) {
     package { 'unicorn':
