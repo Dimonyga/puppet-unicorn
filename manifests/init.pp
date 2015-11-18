@@ -30,4 +30,9 @@ class unicorn {
     group  => 'root',
     mode   => '0744',
   }
+
+  $hiera_values = hiera_hash (unicorn::instance)
+  create_resources (unicorn::instance, $hiera_values)
+
+
 }

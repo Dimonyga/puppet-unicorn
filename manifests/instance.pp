@@ -1,8 +1,8 @@
 define unicorn::instance (
-  $working_directory = hiera("unicorn::instance::${name}::working_directory", $unicorn::instance::${name}::working_directory),
-  $listen = hiera("unicorn::instance::${name}::listen", $unicorn::instance::${name}::listen),
-  $pid = hiera("unicorn::instance::${name}::pid", $unicorn::instance::${name}::pid),
-  $user = hiera("unicorn::instance::${name}::user", $unicorn::instance::${name}::user),
+  $working_directory,
+  $listen,
+  $pid,
+  $user,
   $before_fork      = "do |server, worker|
   old_pid = \"#{server.config[:pid]}.oldbin\"
   if File.exists?(old_pid) && server.pid != old_pid
@@ -17,7 +17,11 @@ if GC.respond_to?(:copy_on_write_friendly=)
   GC.copy_on_write_friendly = true
 end",
   $timeout          = 120,
-  $worker_processes = 8,) {
+  $worker_processes = 8,
+  $stderr_path = "${working_directory}/log/unicorn.stderr.log"
+  $stdout_path = "${working_directory}/log/unicorn.stdout.log"
+  $environment = "development"
+  ) {
   class { 'unicorn': }
 
   file { "/etc/unicorn.d/${name}": content => template('unicorn/instance.erb') }
@@ -30,6 +34,6 @@ end",
     stop       => "/etc/init.d/unicorn stop --instance=${name}",
     hasrestart => false,
     hasstatus  => false,
-    require    => [Class['unicorn'],File["/etc/unicorn.d/${name}"]]
+    require    => File["/etc/unicorn.d/${name}"]
   }
 }

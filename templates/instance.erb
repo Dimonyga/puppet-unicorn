@@ -6,3 +6,6 @@ timeout <%= @timeout %>
 pid '<%= @pid %>'
 preload_app <%= @preload_app %>
 user '<%= @user %>'
+stderr_path '<%= @stderr_path %>'
+stdout_path '<%= @stdout_path %>'
+ENV['RACK_ENV'] = '<%= @environment %>'
