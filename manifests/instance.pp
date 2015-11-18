@@ -22,7 +22,9 @@ end",
   $stdout_path = "${working_directory}/log/unicorn.stdout.log",
   $environment = "development",
   ) {
-  class { 'unicorn': }
+  if ! defined(Class['unicorn']) {
+    class { 'unicorn' }
+  }
 
   file { "/etc/unicorn.d/${name}": content => template('unicorn/instance.erb') }
 
