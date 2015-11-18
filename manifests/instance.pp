@@ -1,8 +1,8 @@
 define unicorn::instance (
-  $working_directory,
-  $listen,
-  $pid,
-  $user,
+  $working_directory = hiera("unicorn::instance::${name}::working_directory", $unicorn::instance::${name}::working_directory),
+  $listen = hiera("unicorn::instance::${name}::listen", $unicorn::instance::${name}::listen),
+  $pid = hiera("unicorn::instance::${name}::pid", $unicorn::instance::${name}::pid),
+  $user = hiera("unicorn::instance::${name}::user", $unicorn::instance::${name}::user),
   $before_fork      = "do |server, worker|
   old_pid = \"#{server.config[:pid]}.oldbin\"
   if File.exists?(old_pid) && server.pid != old_pid
