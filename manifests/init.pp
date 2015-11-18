@@ -29,5 +29,6 @@ class unicorn {
     source => 'puppet:///modules/unicorn/unicorn',
     owner  => 'root',
     group  => 'root',
+    mode   => '0744',
   }
 }
