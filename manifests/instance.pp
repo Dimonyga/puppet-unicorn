@@ -18,9 +18,9 @@ if GC.respond_to?(:copy_on_write_friendly=)
 end",
   $timeout          = 120,
   $worker_processes = 8,
-  $stderr_path = "${working_directory}/log/unicorn.stderr.log"
-  $stdout_path = "${working_directory}/log/unicorn.stdout.log"
-  $environment = "development"
+  $stderr_path = "${working_directory}/log/unicorn.stderr.log",
+  $stdout_path = "${working_directory}/log/unicorn.stdout.log",
+  $environment = "development",
   ) {
   class { 'unicorn': }
 
