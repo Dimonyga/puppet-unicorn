@@ -15,6 +15,6 @@ Basic configuration of an unicorn instance (example taken from the puppet module
   	}
   	
 Tested On:
-    Centos 7  => Some warnings
-    Fedora 23 => OK
-    Debian 8  => OK
+    * Centos 7  => OK
+    * Fedora 23 => OK
+    * Debian 8  => OK
