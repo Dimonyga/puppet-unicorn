@@ -13,6 +13,11 @@
 class unicorn {
 
   require ruby::dev
+  if ($osfamily == "RedHat") {
+    package { "glibc_headers":
+      ensure => present,
+    }
+  }
 
   if (!defined(Package['unicorn'])) {
     package { 'unicorn':
