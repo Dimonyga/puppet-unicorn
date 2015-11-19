@@ -30,10 +30,10 @@ class unicorn {
     group  => 'root',
     mode   => '0744',
   }
-  $hiera_values = hiera_hash($unicorn::instance, undef, undef)
-  if ($hiera_values == undef) {
+  if ($unicorn::instance == undef) {
     notice "no hiera instances"
   } else {
+    $hiera_values = hiera_hash($unicorn::instance, undef)
     create_resources (unicorn::instance, $hiera_values)
   }
 
